@@ -28,6 +28,8 @@ iOS/Android App for food recommendations
 
 [expo config reference](https://docs.expo.io/versions/latest/workflow/configuration/)
 
-[reactive native map reference](https://github.com/react-native-community/react-native-maps/blob/master/docs/mapview.md)
+[react native docs](https://facebook.github.io/react-native/docs)
+
+[react native map reference](https://github.com/react-native-community/react-native-maps/blob/master/docs/mapview.md)
 
 [expo icons reference](https://expo.github.io/vector-icons/)
