@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View, Alert, TouchableHighlight, TouchableOpacity, Image, PricingCard} from 'react-native';
-import { Button, ThemeProvider, Card, Icon } from 'react-native-elements'
+import { Button, ThemeProvider, Card, Icon, Tile } from 'react-native-elements'
 import { ExpoLinksView } from '@expo/samples';
 
 
@@ -12,33 +12,38 @@ export default class RestaurantSuggestion extends React.Component {
       <ScrollView>
 
 
-      <Card
-        title='Salt Hill Pub'
-      >
-      <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center'}}>
-        <Image source={require('../images/pic1.png')}/>
+      <Card>
+        <Text style={{textAlign: 'center',fontWeight:'bold', fontSize:20}}>Your Recommendations:</Text>
+      </Card>
+
+      <View style = {{flex:1}}>
+      <Card>
+        <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center'}}>
+          <Image source={require('../images/pic1.png')} style={{width:imageWidth/1.5, height:imageWidth/1.5}}/>
+          <Text style={{textAlign:'center', fontWeight:'bold'}}>Mac and Cheese</Text>
+        </TouchableOpacity>
+      </Card>
+      </View>
+
+      <Card>
+        <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center',}}>
+          <Image source={require('../images/pic2.png')} style={{width:imageWidth/1.5, height:imageWidth/1.5}}/>
+          <Text style={{textAlign:'center', fontWeight:'bold'}}>Fish and Chips</Text>
+        </TouchableOpacity>
+      </Card>
+
+      <Card>
+      <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center',}}>
+        <Image source={require('../images/pic3.png')} style={{width:imageWidth/1.5, height:imageWidth/1.5}}/>
         <Text style={{textAlign:'center', fontWeight:'bold'}}>Nachos</Text>
-        <Text></Text>
       </TouchableOpacity>
+      </Card>
 
+      <Card>
       <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center',}}>
-        <Image source={require('../images/pic2.png')}/>
-        <Text style={{textAlign:'center', fontWeight:'bold'}}>Fish and Chips</Text>
-        <Text></Text>
+        <Image source={require('../images/pic4.png')} style={{width:imageWidth/1.5, height:imageWidth/1.5}}/>
+        <Text style={{textAlign:'center', fontWeight:'bold'}}>Butternut Squash Risotto</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center',}}>
-        <Image source={require('../images/pic3.png')}/>
-        <Text style={{textAlign:'center', fontWeight:'bold'}}>Burger</Text>
-        <Text></Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={{justifyContent: 'center',alignItems: 'center',}}>
-        <Image source={require('../images/pic4.png')}/>
-        <Text style={{textAlign:'center', fontWeight:'bold'}}>Mac and Cheese</Text>
-        <Text></Text>
-      </TouchableOpacity>
-
       </Card>
       
 
@@ -75,6 +80,7 @@ const styles = StyleSheet.create(
       container:
       {
           flex: 1,
+          flexDirection: 'row',
           backgroundColor: '#7BC8DA' // Set your own custom Color
       }
   });

@@ -4,8 +4,6 @@ import { Button, ThemeProvider, Card, Icon } from 'react-native-elements'
 import { ExpoLinksView } from '@expo/samples';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-
-
 export default class LocationConfirm extends React.Component {
 
   render() {
@@ -18,7 +16,7 @@ export default class LocationConfirm extends React.Component {
         <Card title="Are you at:">
         <Button
             onPress={() => this.props.navigation.navigate('Suggestions')}
-            title="Salt Hill Pub"
+            title="Murphy's on the Green"
             buttonStyle= {{ backgroundColor: "gray"}}
             raised
           />

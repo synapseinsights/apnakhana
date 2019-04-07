@@ -97,9 +97,9 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+  LocationConfirmStack,
   ViewMenuStack, 
   RestaurantSuggestionStack, 
-  LocationConfirmStack,
   WhereAreYouStack,
   InteractiveModeStack
 });
