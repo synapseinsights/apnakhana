@@ -100,6 +100,6 @@ export default createBottomTabNavigator({
   ViewMenuStack, 
   RestaurantSuggestionStack, 
   LocationConfirmStack,
-  // WhereAreYouStack,
+  WhereAreYouStack,
   InteractiveModeStack
 });
