@@ -205,7 +205,7 @@ export default class CameraExample extends React.Component {
             <View style={{ flex: 1 }}>
                 <Card>
                     <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={require('../images/calamari.jpg')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                        <Image source={require('../images/calamari.jpg')} style={{width: imageWidth / 1.5, height: imageWidth / 1.5, display: this.state.chosen_menu === "Crispy Rhode Island Calamari" ? 'flex' : 'none'}} />
                         <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>{this.state.chosen_menu}</Text>
                         <Text>Your Match: 82% </Text>
                         <Text>Overall likes: 103 </Text>
@@ -294,6 +294,7 @@ async function uploadImageAsync(uri) {
 
   return await snapshot.ref.getDownloadURL();
 }
+
 const loadingstyles = StyleSheet.create({
   container: {
     flex: 1,

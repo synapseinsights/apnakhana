@@ -3,6 +3,7 @@ import { Platform, Text, View, StyleSheet, ActivityIndicator } from 'react-nativ
 import { Constants, Location, MapView, Permissions } from 'expo';
 import { Button, Card, ThemeProvider } from 'react-native-elements'
 import {firebase, db} from '../components/Firebase'
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class App extends Component {
   constructor(props) {
@@ -108,6 +109,7 @@ export default class App extends Component {
     if (this.state.nearestRestaurants) { 
       // Render the restaurants
       return (
+        <ScrollView>
         <View style={styles.container}>
         <Text></Text>
         <Text></Text>
@@ -142,7 +144,11 @@ export default class App extends Component {
               );
             })}
             </Card>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
           </View>
+          </ScrollView>
           
         )
     } else {
@@ -163,7 +169,7 @@ const styles = StyleSheet.create({
     // marginTop: 25,
     // marginBottom: 150,
     flexDirection: 'column',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#79a6c4',
   },
