@@ -26,15 +26,11 @@ export default class App extends Component {
       this.setState({
         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
-    } 
-      // await this._getLocationAsync();
-      // await this._getRestaurantsFromDB();
-      // await this._getGoogleList();
-      // await this._filterRestaurants();
-    
+    }    
   }
 
   async componentDidMount() {
+    // Get user's current mobile location, get our db restaurants, query google's map API to get restaurants in the vicinity of the user and filter the list based on the restaurants we actually have data on. Do this all before rendering anything to screen and show a loading circle otherwise
     await this._getLocationAsync();
     await this._getRestaurantsFromDB();
     await this._getGoogleList();
@@ -42,19 +38,20 @@ export default class App extends Component {
   }
 
   _getLocationAsync = async () => {
+    // Get mobile location
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       this.setState({
         errorMessage: 'Permission to access location was denied',
       });
     }
-
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location: location });
     this.state.location ? console.log("LOCATION SAVED") : console.log("NO LOCATION")
   };
 
   _getRestaurantsFromDB = async () => {
+    // Get our db restaurants
     const snapshot = await db.ref('Restaurants').once('value')
     let restaurants = await Object.keys(snapshot.val());
     this.setState({
@@ -64,6 +61,7 @@ export default class App extends Component {
   }
 
   _getGoogleList = async () => {
+    // query google for restaurants in the vicinity of the user (1500 meters)
     try {
       let latitude = this.state.location.coords.latitude;
       let longitude = this.state.location.coords.longitude;
@@ -87,8 +85,7 @@ export default class App extends Component {
   }
 
   _filterRestaurants = async () => {
-
-      // filter by db restaurants
+      // filter google results by db restaurants
       let googleResults = this.state.googleResults
       let restaurants = this.state.restaurants
       let nearestRestaurants = [];
@@ -109,6 +106,7 @@ export default class App extends Component {
 
   render() {
     if (this.state.nearestRestaurants) { 
+      // Render the restaurants
       return (
         <View style={styles.container}>
           {this.state.nearestRestaurants.map((res) => {
@@ -127,6 +125,7 @@ export default class App extends Component {
           </View>
         )
     } else {
+      // show a loading screen
         return (
           <View style={[styles.container, styles.horizontal]}>
             <ActivityIndicator size="large" color="#0000ff" />
