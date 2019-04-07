@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Constants, Location, MapView, Permissions } from 'expo';
 import { Button, Card, ThemeProvider } from 'react-native-elements'
-import db from '../components/Firebase'
+import {firebase, db} from '../components/Firebase'
 
 export default class App extends Component {
   constructor(props) {
@@ -142,7 +142,7 @@ export default class App extends Component {
     } else {
       // show a loading screen
         return (
-          <View style={[styles.container, styles.horizontal]}>
+          <View style={[loadingstyles.container, loadingstyles.horizontal]}>
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
         )

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, TouchableOpacity,TouchableHighlight, Image, StyleSheet, Modal, Alert, FlatList  } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Image, StyleSheet, Alert, FlatList, ActivityIndicator  } from 'react-native';
+import { Card } from 'react-native-elements'
 import IconButton from '../components/IconButton';
 
 import { Camera, Permissions, FileSystem } from 'expo';
@@ -17,6 +18,8 @@ export default class CameraExample extends React.Component {
     uploading: false,
     image: null,
     menus: null,
+    processingImage: false,
+    chosen_menu: null
   };
 
   constructor(props) {
@@ -92,6 +95,10 @@ export default class CameraExample extends React.Component {
         );
         let responseJsonOrig = await response.json();
         responseJson = responseJsonOrig.responses
+        Alert.alert(
+          'Image Processing Success!',
+          'Click to see recommendations based on the menu you uploaded',
+        );
         let googleResults = [];
         responseJson.forEach( (res)=> {
           let res2 = res.textAnnotations
@@ -107,11 +114,6 @@ export default class CameraExample extends React.Component {
         });
 
         let currentRestaurant = "Murphy's On the Green"
-
-        Alert.alert(
-          'Saved',
-          'Your photo was successfully saved!',
-        );
         this._compareMenuItemFromDB(googleResults);
         } catch (error) {
         console.log(error);
@@ -137,15 +139,19 @@ export default class CameraExample extends React.Component {
         }
       }
       console.log("This is your chosen menu!",chosen_menu)
+      this.setState({
+        chosen_menu: chosen_menu,
+        processingImage: false
+      })
       this.hasCameraPermission = false
       // Render Recommended Items
-      this.state.chosen_menu = s;
-      _renderOCRresult();
+      // this.state.chosen_menu = s;
+      // _renderOCRresult();
     }
-    _renderOCRresult = async() => {
-      const { chosen_menu } = this.state;
+    // _renderOCRresult = async() => {
+    //   const { chosen_menu } = this.state;
 
-    }
+    // }
 
     _getRestaurantsFromDB = async () => {
       // Grab menus from DB on Murphys
@@ -163,6 +169,9 @@ export default class CameraExample extends React.Component {
       if(this.camera){
         console.log("BUTTON PRESSED AND IN CAMERA")
         let data = await this.camera.takePictureAsync()
+        this.setState({
+          processingImage: true
+        })
         console.log('Submitting to GOOGLE....',data.uri);
         let uploadUrl = await uploadImageAsync(data.uri);
         this.setState({ image: uploadUrl });
@@ -179,51 +188,76 @@ export default class CameraExample extends React.Component {
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
-      return (
-        <View style={{ flex: 1 }}>
-        {this.state.googleResponse && (
-          <FlatList
-            data={this.state.googleResponse.responses[0].textAnnotations}
-            extraData={this.state}
-            keyExtractor={this._keyExtractor}
-            renderItem={({ item }) => <Text>Item: {item.description}</Text>}
-          />
-          )}
-          <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  });
-                }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
-                </Text>
-              </TouchableOpacity>
-              <View style={styles.lower_buttons_container}>
-                <IconButton is_transparent={true} icon="photo-camera"
-                  styles={styles.camera_photo_button}
-                  onPress={this.takePicture} />
+      if (this.state.processingImage && !this.state.chosen_menu){
+        return (
+          // spinny wheel
+          <View style={[loadingstyles.container, loadingstyles.horizontal]}>
+          {/* <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Processing Photo...</Text> */}
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        )
+      } else if (this.state.chosen_menu) {
+          return (
+            <View style={styles.wrapper}>
+             <Card>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>How about trying:</Text>
+            </Card>
+            <View style={{ flex: 1 }}>
+                <Card>
+                    <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Image source={require('../images/pic1.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                        <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{this.state.chosen_menu}</Text>
+                    </TouchableOpacity>
+                </Card>
               </View>
             </View>
-          </Camera>
-        </View>
-
-      );
+          )
+      } else {
+        return (
+          <View style={{ flex: 1 }}>
+          {this.state.googleResponse && (
+            <FlatList
+              data={this.state.googleResponse.responses[0].textAnnotations}
+              extraData={this.state}
+              keyExtractor={this._keyExtractor}
+              renderItem={({ item }) => <Text>Item: {item.description}</Text>}
+            />
+            )}
+            <Camera style={{ flex: 1 }} type={this.state.type} ref={ref => { this.camera = ref; }}>
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  flexDirection: 'row',
+                }}>
+                <TouchableOpacity
+                  style={{
+                    flex: 0.1,
+                    alignSelf: 'flex-end',
+                    alignItems: 'center',
+                  }}
+                  onPress={() => {
+                    this.setState({
+                      type: this.state.type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back,
+                    });
+                  }}>
+                  <Text
+                    style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                    {' '}Flip{' '}
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.lower_buttons_container}>
+                  <IconButton is_transparent={true} icon="photo-camera"
+                    styles={styles.camera_photo_button}
+                    onPress={this.takePicture} />
+                </View>
+              </View>
+            </Camera>
+          </View>
+        );
+      }
     }
   }
 
@@ -258,7 +292,19 @@ async function uploadImageAsync(uri) {
 
   return await snapshot.ref.getDownloadURL();
 }
-
+const loadingstyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
+})
+const dimensions = Dimensions.get('window');
+const imageWidth = dimensions.width;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
