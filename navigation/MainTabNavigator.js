@@ -5,7 +5,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import WhereAreYou from '../screens/WhereAreYou';
-import QuickSuggestions from '../screens/QuickSuggestions';
+import LocationConfirm from '../screens/LocationConfirm';
+import RestaurantSuggestion from '../screens/RestaurantSuggestion';
+import ViewMenu from '../screens/ViewMenu';
 import InteractiveMode from '../screens/InteractiveMode';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -27,11 +29,10 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const QuickSuggestionsStack = createStackNavigator({
-  Links: QuickSuggestions,
+const LocationConfirmStack = createStackNavigator({
+  Location: LocationConfirm,
 });
-
-QuickSuggestionsStack.navigationOptions = {
+LocationConfirmStack.navigationOptions = {
   tabBarLabel: 'Quick Suggestions',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -39,6 +40,19 @@ QuickSuggestionsStack.navigationOptions = {
       name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'}
     />
   ),
+};
+
+
+const RestaurantSuggestionStack = createStackNavigator({
+  Suggestions: RestaurantSuggestion,
+});
+RestaurantSuggestionStack.navigationOptions = {
+};
+
+const ViewMenuStack = createStackNavigator({
+  Menu: ViewMenu,
+});
+ViewMenu.navigationOptions = {
 };
 
 const WhereAreYouStack = createStackNavigator({
@@ -83,7 +97,9 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  QuickSuggestionsStack,
+  ViewMenuStack, 
+  RestaurantSuggestionStack, 
+  LocationConfirmStack,
   WhereAreYouStack,
   InteractiveModeStack
 });

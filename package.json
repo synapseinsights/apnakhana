@@ -14,12 +14,16 @@
     "@expo/samples": "2.1.1",
     "eslint": "^5.16.0",
     "expo": "^32.0.0",
+    "native-base": "^2.12.1",
     "firebase": "^5.9.3",
     "react": "16.5.0",
+    "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
-    "react-native-firebase": "^5.2.3",
-    "react-navigation": "^3.0.9"
+    "react-native-ui-kitten": "^3.1.2",
+    "react-native-vector-icons": "^6.4.2",
+    "react-navigation": "^3.6.1",
+    "react-simple-card": "^1.0.11"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
