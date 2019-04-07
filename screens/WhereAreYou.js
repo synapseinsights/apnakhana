@@ -119,7 +119,7 @@ export default class App extends Component {
                 <Button
                   onPress = {() => this.props.navigation.navigate('Suggestions',{'name': this.state.currentRestaurant.name })}
                   title={this.state.currentRestaurant.name}
-                  buttonStyle= {{ backgroundColor: "gray"}}
+                  buttonStyle= {{ backgroundColor: "#87A58E"}}
                   raised
                   key={this.state.currentRestaurant.id}
                 />
