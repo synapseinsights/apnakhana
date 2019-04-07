@@ -127,7 +127,7 @@ export default class App extends Component {
                   <Button
                     onPress = {this._onPressButton}
                     title={res.name}
-                    buttonStyle= {{ backgroundColor: "#7BC8DA"}}
+                    buttonStyle= {{ backgroundColor: "#FF9300"}}
                     raised
                     key={res.id}
                   />
