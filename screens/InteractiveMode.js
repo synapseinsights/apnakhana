@@ -8,6 +8,7 @@ import {firebase, db} from '../components/Firebase'
 import uuid from "uuid";
 
 export default class CameraExample extends React.Component {
+  static navigationOptions = { header: null };
   state = {
     is_camera_visible: true,
     is_photo_visible: false,
@@ -199,6 +200,8 @@ export default class CameraExample extends React.Component {
       } else if (this.state.chosen_menu) {
           return (
             <View style={styles.wrapper}>
+            <Text></Text>
+            <Text></Text>
              <Card>
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>How about trying:</Text>
             </Card>

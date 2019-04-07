@@ -4,6 +4,7 @@ import { Button, Card } from 'react-native-elements'
 import db from '../components/Firebase'
 
 export default class RestaurantSuggestionNew extends React.Component {
+    static navigationOptions = { header: null };
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +35,8 @@ export default class RestaurantSuggestionNew extends React.Component {
             return (
                 <View style={styles.container}>
                     <ScrollView>
+                        <Text></Text>
+                        <Text></Text>
                         <Card>
                             <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Recommended for you</Text>
                         </Card>

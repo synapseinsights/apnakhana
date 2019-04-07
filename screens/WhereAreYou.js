@@ -6,6 +6,7 @@ import {firebase, db} from '../components/Firebase'
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default class App extends Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.state = {
