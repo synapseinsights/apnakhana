@@ -15,7 +15,7 @@ export default class RestaurantSuggestionNew extends React.Component {
         this.setState({
             currentLocation: this.props.navigation.getParam('name', null)
         })
-        await this._getRestaurantsFromDB();
+        // await this._getRestaurantsFromDB();
 
     }
     componentWillReceiveProps() {
@@ -34,37 +34,44 @@ export default class RestaurantSuggestionNew extends React.Component {
             return (
                 <View style={styles.container}>
                     <ScrollView>
-                        <Card title="Your Recommendations:">
-                            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <Image source={require('../images/pic1.png')} />
-                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Nachos</Text>
-                                <Text></Text>
-                            </TouchableOpacity>
+                        <Card>
+                            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Your Recommendations:</Text>
+                        </Card>
 
+                        <View style={{ flex: 1 }}>
+                            <Card>
+                                <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image source={require('../images/pic1.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                                    <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Mac and Cheese</Text>
+                                </TouchableOpacity>
+                            </Card>
+                        </View>
+
+                        <Card>
                             <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require('../images/pic2.png')} />
+                                <Image source={require('../images/pic2.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
                                 <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Fish and Chips</Text>
-                                <Text></Text>
                             </TouchableOpacity>
+                        </Card>
 
+                        <Card>
                             <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require('../images/pic3.png')} />
-                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Burger</Text>
-                                <Text></Text>
+                                <Image source={require('../images/pic3.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Nachos</Text>
                             </TouchableOpacity>
+                        </Card>
 
+                        <Card>
                             <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require('../images/pic4.png')} />
-                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Mac and Cheese</Text>
-                                <Text></Text>
+                                <Image source={require('../images/pic4.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>Butternut Squash Risotto</Text>
                             </TouchableOpacity>
-
                         </Card>
                         <Card title="Explore:">
                             <Button
                                 title="See Full Menu"
                                 buttonStyle={{ backgroundColor: "gray" }}
-                                onPress={() => this.props.navigation.navigate('Menu')}
+                                onPress={() => this.props.navigation.push('Menu')}
                             />
                             <Text></Text>
 
@@ -93,6 +100,7 @@ export default class RestaurantSuggestionNew extends React.Component {
 
 
 const dimensions = Dimensions.get('window');
+const imageWidth = dimensions.width;
 const nolocationstyle = StyleSheet.create({
     container: {
         flex: 1,

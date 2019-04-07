@@ -59,7 +59,14 @@ RestaurantSuggestionStack.navigationOptions = {
 const ViewMenuStack = createStackNavigator({
   Menu: ViewMenu,
 });
-ViewMenu.navigationOptions = {
+ViewMenuStack.navigationOptions = {
+  tabBarLabel: 'Menu',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-basket' : 'md-basket'}
+    />
+  ),
 };
 
 const WhereAreYouStack = createStackNavigator({
@@ -106,5 +113,6 @@ InteractiveModeStack.navigationOptions = {
 export default createBottomTabNavigator({
   WhereAreYouStack,
   RestaurantSuggestionStack, 
+  ViewMenuStack,
   InteractiveModeStack
 });

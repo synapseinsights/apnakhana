@@ -5,9 +5,7 @@ import { ExpoLinksView } from '@expo/samples';
 
 
 export default class ViewMenu extends React.Component {
-static navigationOptions = {
-    title: 'View Menu',
-    };
+
   render() {
         return (
       <View style = { styles.container }>
