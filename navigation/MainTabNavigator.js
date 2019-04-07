@@ -6,47 +6,54 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import WhereAreYou from '../screens/WhereAreYou';
 import LocationConfirm from '../screens/LocationConfirm';
-import RestaurantSuggestion from '../screens/RestaurantSuggestion';
+import RestaurantSuggestionNew from '../screens/RestaurantSuggestionNew';
 import ViewMenu from '../screens/ViewMenu';
 import InteractiveMode from '../screens/InteractiveMode';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+// const HomeStack = createStackNavigator({
+//   Home: HomeScreen,
+// });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+// HomeStack.navigationOptions = {
+//   tabBarLabel: 'Home',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'md-information-circle'
+//       }
+//     />
+//   ),
+// };
 
-const LocationConfirmStack = createStackNavigator({
-  Location: LocationConfirm,
+// const LocationConfirmStack = createStackNavigator({
+//   Location: LocationConfirm,
+// });
+// LocationConfirmStack.navigationOptions = {
+//   tabBarLabel: 'Quick Suggestions',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'}
+//     />
+//   ),
+// };
+
+
+const RestaurantSuggestionStack = createStackNavigator({
+  Suggestions: RestaurantSuggestionNew,
 });
-LocationConfirmStack.navigationOptions = {
-  tabBarLabel: 'Quick Suggestions',
+RestaurantSuggestionStack.navigationOptions = {
+  tabBarLabel: 'Suggestions',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'}
     />
   ),
-};
-
-
-const RestaurantSuggestionStack = createStackNavigator({
-  Suggestions: RestaurantSuggestion,
-});
-RestaurantSuggestionStack.navigationOptions = {
 };
 
 const ViewMenuStack = createStackNavigator({
@@ -82,24 +89,22 @@ InteractiveModeStack.navigationOptions = {
     />
   ),
 };
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+// const SettingsStack = createStackNavigator({
+//   Settings: SettingsScreen,
+// });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
+// SettingsStack.navigationOptions = {
+//   tabBarLabel: 'Settings',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+//     />
+//   ),
+// };
 
 export default createBottomTabNavigator({
-  ViewMenuStack, 
-  RestaurantSuggestionStack, 
-  LocationConfirmStack,
   WhereAreYouStack,
+  RestaurantSuggestionStack, 
   InteractiveModeStack
 });

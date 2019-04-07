@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Constants, Location, MapView, Permissions } from 'expo';
-import { Button, ThemeProvider } from 'react-native-elements'
+import { Button, Card, ThemeProvider } from 'react-native-elements'
 import db from '../components/Firebase'
 
 export default class App extends Component {
@@ -13,6 +13,7 @@ export default class App extends Component {
       location: null,
       googleResults: null,
       nearestRestaurants: null,
+      currentRestaurant: null
       }
 
     this._getLocationAsync = this._getLocationAsync.bind(this)
@@ -91,14 +92,13 @@ export default class App extends Component {
       let nearestRestaurants = [];
       googleResults.forEach( (res) => {
         if (restaurants.indexOf(res.name) !== -1){
-          // console.log("ADDING: " + res.name)
           nearestRestaurants.push(res);
         } else {
-          // console.log("SKIPPING: " + res.name)
         }
       }) 
       this.setState({
-          nearestRestaurants: nearestRestaurants
+          nearestRestaurants: nearestRestaurants.slice(1),
+          currentRestaurant: nearestRestaurants[0]
         })
       this.state.nearestRestaurants ? console.log("NEAREST FILTERED") : console.log("NO FILTER")
  
@@ -109,20 +109,35 @@ export default class App extends Component {
       // Render the restaurants
       return (
         <View style={styles.container}>
-          {this.state.nearestRestaurants.map((res) => {
-            return (
-              <ThemeProvider theme={theme} key={res.id}>
+        <Card title="Are you at:">
+          <ThemeProvider theme={theme} key={this.state.currentRestaurant.id}>
                 <Button
-                  onPress = {this._onPressButton}
-                  title={res.name}
+                  onPress = {() => this.props.navigation.navigate('Suggestions',{'name': this.state.currentRestaurant.name })}
+                  title={this.state.currentRestaurant.name}
                   buttonStyle= {{ backgroundColor: "#56ad47"}}
                   raised
-                  key={res.id}
+                  key={this.state.currentRestaurant.id}
                 />
-              </ThemeProvider>
-            );
-          })}
+            </ThemeProvider>
+            </Card>
+          <Card title="Or Nearby:">
+            {this.state.nearestRestaurants.map((res) => {
+              return (
+                <ThemeProvider theme={theme} key={res.id}>
+                  <Button
+                    onPress = {this._onPressButton}
+                    title={res.name}
+                    buttonStyle= {{ backgroundColor: "#7BC8DA"}}
+                    raised
+                    key={res.id}
+                  />
+                  <Text></Text>
+                </ThemeProvider>
+              );
+            })}
+            </Card>
           </View>
+          
         )
     } else {
       // show a loading screen
@@ -139,7 +154,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 150,
+    marginTop: 25,
     marginBottom: 150,
     flexDirection: 'column',
     justifyContent: 'space-between',
