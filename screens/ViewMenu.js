@@ -76,6 +76,6 @@ const styles = StyleSheet.create(
       container:
       {
           flex: 1,
-          backgroundColor: '#FF9300' // Set your own custom Color
+          backgroundColor: '#79a6c4' // Set your own custom Color
       }
   });

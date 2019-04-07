@@ -109,17 +109,23 @@ export default class App extends Component {
       // Render the restaurants
       return (
         <View style={styles.container}>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+
         <Card title="Are you at:">
           <ThemeProvider theme={theme} key={this.state.currentRestaurant.id}>
                 <Button
                   onPress = {() => this.props.navigation.navigate('Suggestions',{'name': this.state.currentRestaurant.name })}
                   title={this.state.currentRestaurant.name}
-                  buttonStyle= {{ backgroundColor: "#56ad47"}}
+                  buttonStyle= {{ backgroundColor: "gray"}}
                   raised
                   key={this.state.currentRestaurant.id}
                 />
             </ThemeProvider>
             </Card>
+          <Text></Text>
           <Card title="Or Nearby:">
             {this.state.nearestRestaurants.map((res) => {
               return (
@@ -127,7 +133,7 @@ export default class App extends Component {
                   <Button
                     onPress = {this._onPressButton}
                     title={res.name}
-                    buttonStyle= {{ backgroundColor: "#FF9300"}}
+                    buttonStyle= {{ backgroundColor: "gray"}}
                     raised
                     key={res.id}
                   />
@@ -154,12 +160,12 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 25,
-    marginBottom: 150,
+    // marginTop: 25,
+    // marginBottom: 150,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#79a6c4',
   },
   paragraph: {
     margin: 24,
