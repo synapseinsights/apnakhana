@@ -83,7 +83,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  WhereAreYouStack,
   QuickSuggestionsStack,
+  WhereAreYouStack,
   InteractiveModeStack
 });

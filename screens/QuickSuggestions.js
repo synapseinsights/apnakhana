@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { Button, ThemeProvider } from 'react-native-elements'
-import { ExpoLinksView } from '@expo/samples';
+import db from '../components/Firebase'
 
 export default class QuickSuggestions extends React.Component {
   static navigationOptions = {
@@ -13,7 +13,7 @@ export default class QuickSuggestions extends React.Component {
       <View style={styles.container}>
         <ThemeProvider theme={theme}>
           <Button
-            onPress = {this._onPressButton}
+            onPress = {this.getRestaurantsFromDB}
             title="Restaurant We Think"
             buttonStyle= {{ backgroundColor: "#56ad47"}}
             raised
@@ -40,7 +40,22 @@ export default class QuickSuggestions extends React.Component {
   _onPressButton() {
     Alert.alert("You pressed the button!")
   }
+  getRestaurantsFromDB = () => {
+    db.ref('Restaurants').once('value')
+    .then((snapshot) => {
+      let restaurants = Object.keys(snapshot.val());
+      this.setState({
+        restaurants: restaurants
+      })
+      console.log(this.state.restaurants);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
 }
+
 
 // Styling for specific react-native-elements components
 const theme = {
