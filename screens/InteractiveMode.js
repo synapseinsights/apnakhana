@@ -172,7 +172,7 @@ export default class CameraExample extends React.Component {
         this.setState({
           processingImage: true
         })
-        console.log('Submitting to GOOGLE....',data.uri);
+        console.log('Submitting to GOOGLE...',data.uri);
         let uploadUrl = await uploadImageAsync(data.uri);
         this.setState({ image: uploadUrl });
         console.log("uploadURL",uploadUrl)
@@ -205,8 +205,10 @@ export default class CameraExample extends React.Component {
             <View style={{ flex: 1 }}>
                 <Card>
                     <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={require('../images/pic1.png')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
-                        <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{this.state.chosen_menu}</Text>
+                        <Image source={require('../images/calamari.jpg')} style={{ width: imageWidth / 1.5, height: imageWidth / 1.5 }} />
+                        <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>{this.state.chosen_menu}</Text>
+                        <Text>Your Match: 82% </Text>
+                        <Text>Overall likes: 103 </Text>
                     </TouchableOpacity>
                 </Card>
               </View>

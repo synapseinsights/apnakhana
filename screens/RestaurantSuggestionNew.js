@@ -35,7 +35,7 @@ export default class RestaurantSuggestionNew extends React.Component {
                 <View style={styles.container}>
                     <ScrollView>
                         <Card>
-                            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Your Recommendations:</Text>
+                            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Recommended for you</Text>
                         </Card>
 
                         <View style={{flex: 1, flexDirection:'row', alignItems: 'center' }}>
