@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { Button, Card} from 'react-native-elements'
+import { Button, Card } from 'react-native-elements'
 import db from '../components/Firebase'
 
 export default class RestaurantSuggestionNew extends React.Component {
@@ -18,10 +18,10 @@ export default class RestaurantSuggestionNew extends React.Component {
         await this._getRestaurantsFromDB();
 
     }
-    componentWillReceiveProps(){
+    componentWillReceiveProps() {
         let newlocation = this.props.navigation.getParam('name', null)
         console.log(newlocation)
-        if (newlocation){
+        if (newlocation) {
             console.log("LOCATION CHANGE: " + newlocation)
             this.setState({
                 currentLocation: newlocation
